@@ -1,4 +1,5 @@
 var http = require('request');
+var util = require('util');
 
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
@@ -40,7 +41,8 @@ module.exports = function (app, addon) {
   app.post('/webhook',
     addon.authenticate(),
     function(req, res) {
-      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, 'pong')
+      var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + req.context.item.message.message;
+      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, '<a href="' + url + '">' + url + '</a>')
         .then(function(data){
           res.send(200);
         });

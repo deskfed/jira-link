@@ -6,7 +6,7 @@
     // need to use a local tunnel tool (we highly recommend https://ngrok.com)
     // to make your local add-on server accessible from the internet. You'll also
     // need to specify this property with the base URL of your tunnel:
-    // "localBaseUrl": "https://<your-subdomain>.ngrok.com",
+    "localBaseUrl": "https://11f22618.ngrok.com",
 
     // HipChat add-ons don't use asymmetric key algos
     "usePublicKey": false,
@@ -66,7 +66,7 @@
     // },
     "store": {
       "adapter": "redis",
-      "url": "redis://localhost:6379"
+      "url": "redis://redistogo:cdfd9653ff6f5a7eee3561ca3860cdb6@pearlfish.redistogo.com:10896"
     }
   },
 
@@ -86,7 +86,7 @@
       "adapter": "redis",
       // Again, a PaaS host like Heroku will probably provide the db connection
       // URL to you through the environment, so we tell atlassian-connect-express to use that value.
-      "url": "$DATABASE_URL"
+      "url": "$REDISTOGO_URL"
     },
     // Make sure that your add-on can only be registered by the hosts on
     // these domains.
