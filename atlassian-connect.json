@@ -1,0 +1,32 @@
+{
+    "key": "my-hipchat-add-on",
+    "name": "Ping Pong",
+    "description": "My very first HipChat add-on",
+    "vendor": {
+        "name": "Charlie Awyeah",
+        "url": "https://www.hipchat.com"
+    },
+    "links": {
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+    },
+    "capabilities": {
+        "hipchatApiConsumer": {
+            "scopes": [
+                "send_notification"
+            ]
+        },
+        "installable": {
+            "callbackUrl": "{{localBaseUrl}}/installable"
+        },
+        "configurable": {
+             "url": "{{localBaseUrl}}/config"
+        },
+        "webhook": {
+            "url": "{{localBaseUrl}}/webhook",
+            "pattern": "^/ping",
+            "event": "room_message",
+            "name": "Ping Pong"
+        }
+    }
+}
