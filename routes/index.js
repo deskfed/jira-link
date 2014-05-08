@@ -41,8 +41,8 @@ module.exports = function (app, addon) {
   app.post('/webhook',
     addon.authenticate(),
     function(req, res) {
-      var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + req.context.item.message.message;
-      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, '<a href="' + url + '">' + url + '</a>')
+      var url = extractId(req.context.item.message.message);
+      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, url, {color: 'gray'})
         .then(function(data){
           res.send(200);
         });
@@ -63,5 +63,31 @@ module.exports = function (app, addon) {
       });
     });
   });
+
+  // functions
+  function extractId(msg) {
+    if (msg === null) {
+      return;
+    }
+    var idRegex = /[A-Z]+-[0-9]+/gi,
+        ids = [],
+        links = [];
+    ids = msg.match(idRegex);
+    if (ids && ids.length > 0) {
+      for (id in ids) {
+        console.log('id: ', id);
+        links.push(createUrl(id));
+      }
+    }
+    return links.join(' ');
+  }
+
+  function createUrl(id) {
+    if (id === null) {
+      return;
+    }
+    var url = 'https://' + addon.descriptor.capabilities.webhook.jirabase + '.atlassian.net/browse/' + id;
+    return '<a href="' + url + '">' + url + '</a>';
+  }
 
 };
