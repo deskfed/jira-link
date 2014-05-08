@@ -41,8 +41,13 @@ module.exports = function (app, addon) {
   app.post('/webhook',
     addon.authenticate(),
     function(req, res) {
-      var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + req.context.item.message.message;
-      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, '<a href="' + url + '">' + url + '</a>')
+      var tickets = req.context.item.message.message.match(/^([A-Z]+-[0-9]+)| ([A-Z]+-[0-9]+)/g);
+      var message = [];
+      for (var ticket in tickets) {
+        var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + tickets[ticket];
+        message.push('<a href="' + url + '">' + url + '</a>');
+      }
+      hipchat.sendMessage(req.clientInfo, req.context.item.room.id, message.join('<br/>'))
         .then(function(data){
           res.send(200);
         });
