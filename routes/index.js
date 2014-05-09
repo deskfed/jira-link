@@ -69,7 +69,7 @@ module.exports = function (app, addon) {
     if (msg === null) {
       return;
     }
-    var idRegex = /\s*(\w+-\d+)/gi,
+    var idRegex = /(^[aA-zZ]+-[0-9]+)|\s([aA-zZ]+-[0-9]+)/gi,
         ids = [],
         links = [];
     ids = msg.match(idRegex);
