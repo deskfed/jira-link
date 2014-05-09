@@ -42,7 +42,6 @@ module.exports = function (app, addon) {
     addon.authenticate(),
     function(req, res) {
       var url = extractId(req.context.item.message.message);
-      console.log('----- /webhook', url);
       hipchat.sendMessage(req.clientInfo, req.context.item.room.id, url, {options: {color: 'gray'}})
         .then(function(data){
           res.send(200);
@@ -70,10 +69,9 @@ module.exports = function (app, addon) {
     if (msg === null) {
       return;
     }
-    var idRegex = /(^[a-zA-Z]+-[0-9]+)|\s([a-zA-Z]+-[0-9]+)/gi,
+    var idRegex = /(^[a-z]+-[0-9]+)|\s([a-z]+-[0-9]+)/ig,
         ids = [],
         links = [];
-    console.log('------- extractID', msg, msg.match(idRegex));
     ids = msg.match(idRegex);
     if (ids && ids.length > 0) {
       for (var id in ids) {
