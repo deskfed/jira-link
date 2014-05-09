@@ -24,7 +24,7 @@
         },
         "webhook": {
             "url": "{{localBaseUrl}}/webhook",
-            "pattern": " *([a-zA-Z]+-[0-9]+)",
+            "pattern": "",
             "event": "room_message",
             "name": "Jira Preview",
             "jiraBase": "desk"
