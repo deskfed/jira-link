@@ -3,7 +3,7 @@
     "name": "Jira Link",
     "description": "Listens for Jira project IDs and includes a link to the that task.",
     "vendor": {
-        "name": "Mike Stickel",
+        "name": "Desk.com",
         "url": "https://www.desk.com"
     },
     "links": {
@@ -14,17 +14,15 @@
         "hipchatApiConsumer": {
             "scopes": [
                 "send_notification"
-            ]
+            ],
+            "fromName": "Jira link(s)"
         },
         "installable": {
             "callbackUrl": "{{localBaseUrl}}/installable"
         },
-        "configurable": {
-             "url": "{{localBaseUrl}}/config"
-        },
         "webhook": {
             "url": "{{localBaseUrl}}/webhook",
-            "pattern": "^([A-Z]+-[0-9]+)|\s([A-Z]+-[0-9]+)",
+            "pattern": "([a-zA-Z]+)-([0-9]+)",
             "event": "room_message",
             "name": "Jira Preview",
             "jiraBase": "desk"

@@ -2,6 +2,28 @@
   "name": "jira-link",
   "version": "0.2.0",
   "private": true,
+  "description": "A HipChat addon which listens to messages with Jira task/issue IDs and notifies the room with a link to the ticket.",
+  "author": {
+    "name": "Desk.com",
+    "email": "support@desk.com"
+  },
+  "contributors": [
+    {
+      "name": "Mike Stickel",
+      "email": "mstickel@salesforce.com"
+    },
+    {
+      "name": "Will Ngo",
+      "email": "wngo@salesforce.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/deskfed/jira-link.git"
+  },
+  "engines": {
+    "node": "~0.10.26"
+  },
   "scripts": {
     "start": "NODE_ENV=production node app.js"
   },

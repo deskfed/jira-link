@@ -69,7 +69,7 @@ module.exports = function (app, addon) {
     if (msg === null) {
       return;
     }
-    var idRegex = /(^[A-Z]+-[0-9]+)|\s([A-Z]+-[0-9]+)/gi,
+    var idRegex = /(^[a-z]+-[0-9]+)|\s([a-z]+-[0-9]+)/ig,
         ids = [],
         links = [];
     ids = msg.match(idRegex);
@@ -85,7 +85,7 @@ module.exports = function (app, addon) {
     if (id === null) {
       return;
     }
-    var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + id;
+    var url = 'https://' + addon.descriptor.capabilities.webhook.jiraBase + '.atlassian.net/browse/' + id.toUpperCase();
     return '<a href="' + url + '">' + url + '</a>';
   }
 
